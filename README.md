@@ -20,24 +20,24 @@ Synology NAS devices running Active Backup for Business are **credential gold mi
 </picture>
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                     ATTACK SCENARIOS                                │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  1. NAS Compromise → Full Infrastructure Takeover                   │
-│     Shell on NAS → config.db → ESXi root → all VMs                 │
-│                                                                     │
-│  2. Backup File Exfiltration                                        │
-│     Stolen .abb backup of NAS → extract config.db → decrypt         │
-│                                                                     │
-│  3. Shared Storage / Misconfigured Permissions                      │
-│     SMB/NFS share exposes /volume1/ → read config.db directly       │
-│                                                                     │
-│  4. Lateral Movement Pivot                                          │
-│     Low-priv foothold → NAS via default creds → ABB credentials     │
-│     → Domain Admin / vCenter Admin                                  │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
+                  ┌─────────────────────────────────────────────────────────────────────┐
+                  │                     ATTACK SCENARIOS                                │
+                  ├─────────────────────────────────────────────────────────────────────┤
+                  │                                                                     │
+                  │  1. NAS Compromise → Full Infrastructure Takeover                   │
+                  │     Shell on NAS → config.db → ESXi root → all VMs                  │
+                  │                                                                     │
+                  │  2. Backup File Exfiltration                                        │
+                  │     Stolen .abb backup of NAS → extract config.db → decrypt         │
+                  │                                                                     │
+                  │  3. Shared Storage / Misconfigured Permissions                      │
+                  │     SMB/NFS share exposes /volume1/ → read config.db directly       │
+                  │                                                                     │
+                  │  4. Lateral Movement Pivot                                          │
+                  │     Low-priv foothold → NAS via default creds → ABB credentials     │
+                  │     → Domain Admin / vCenter Admin                                  │
+                  │                                                                     │
+                  └─────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Credential Value Matrix
