@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="a" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2ecc71"/>
+    </marker>
+    <marker id="a-blue" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#58a6ff"/>
+    </marker>
+    <filter id="s">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" rx="12" fill="#0d1117"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" fill="#f0f6fc" font-size="18" font-weight="bold">Decryption Flow — decrypt.py</text>
+  <text x="450" y="55" text-anchor="middle" fill="#8b949e" font-size="12">Reversing the 5-stage encryption chain to recover plaintext passwords</text>
+
+  <!-- ==================== LEFT COLUMN: Key Derivation ==================== -->
+  <text x="200" y="90" text-anchor="middle" fill="#58a6ff" font-size="13" font-weight="bold">KEY DERIVATION (from seed)</text>
+
+  <!-- Seed source -->
+  <rect x="80" y="105" width="240" height="55" rx="8" fill="#1a1e24" stroke="#e74c3c" stroke-width="1.5" filter="url(#s)"/>
+  <text x="200" y="128" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">Seed Source</text>
+  <text x="200" y="148" text-anchor="middle" fill="#8b949e" font-size="10">--so libsynoabk.so.1 | --seed HEX | default</text>
+
+  <!-- Arrow down -->
+  <line x1="200" y1="160" x2="200" y2="185" stroke="#58a6ff" stroke-width="2" marker-end="url(#a-blue)"/>
+
+  <!-- transform_seed -->
+  <rect x="95" y="190" width="210" height="50" rx="8" fill="#1a1e24" stroke="#f39c12" stroke-width="1.5" filter="url(#s)"/>
+  <text x="200" y="212" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="bold">transform_seed()</text>
+  <text x="200" y="230" text-anchor="middle" fill="#8b949e" font-size="10">Modified RC4-KSA substitution</text>
+
+  <!-- Arrow down -->
+  <line x1="200" y1="240" x2="200" y2="260" stroke="#58a6ff" stroke-width="2" marker-end="url(#a-blue)"/>
+
+  <!-- base64_encode -->
+  <rect x="115" y="265" width="170" height="40" rx="8" fill="#1a1e24" stroke="#2ecc71" stroke-width="1.5" filter="url(#s)"/>
+  <text x="200" y="290" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">Base64 Encode</text>
+
+  <!-- Arrow down -->
+  <line x1="200" y1="305" x2="200" y2="325" stroke="#58a6ff" stroke-width="2" marker-end="url(#a-blue)"/>
+
+  <!-- EVP_BytesToKey -->
+  <rect x="80" y="330" width="240" height="55" rx="8" fill="#1a1e24" stroke="#3b82f6" stroke-width="1.5" filter="url(#s)"/>
+  <text x="200" y="352" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold">EVP_BytesToKey</text>
+  <text x="200" y="372" text-anchor="middle" fill="#8b949e" font-size="10">MD5 × 3 → Key (32B) + IV (16B)</text>
+
+  <!-- Arrow right from key derivation to decryption -->
+  <line x1="320" y1="357" x2="430" y2="357" stroke="#58a6ff" stroke-width="2" marker-end="url(#a-blue)"/>
+  <text x="375" y="350" text-anchor="middle" fill="#58a6ff" font-size="10" font-weight="bold">key + iv</text>
+
+  <!-- ==================== RIGHT COLUMN: Decryption ==================== -->
+  <text x="640" y="90" text-anchor="middle" fill="#2ecc71" font-size="13" font-weight="bold">DECRYPTION (ciphertext → plaintext)</text>
+
+  <!-- config.db -->
+  <rect x="530" y="105" width="220" height="55" rx="8" fill="#1a1e24" stroke="#a855f7" stroke-width="1.5" filter="url(#s)"/>
+  <text x="640" y="128" text-anchor="middle" fill="#a855f7" font-size="12" font-weight="bold">config.db (SQLite)</text>
+  <text x="640" y="148" text-anchor="middle" fill="#8b949e" font-size="10">auth_password / login_password</text>
+
+  <!-- Arrow down -->
+  <line x1="640" y1="160" x2="640" y2="185" stroke="#2ecc71" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- Base64 decode -->
+  <rect x="555" y="190" width="170" height="40" rx="8" fill="#1a1e24" stroke="#2ecc71" stroke-width="1.5" filter="url(#s)"/>
+  <text x="640" y="215" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">Base64 Decode</text>
+
+  <!-- Arrow down -->
+  <line x1="640" y1="230" x2="640" y2="255" stroke="#2ecc71" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- Raw ciphertext -->
+  <rect x="545" y="260" width="190" height="35" rx="6" fill="#161b22" stroke="#8b949e" stroke-width="1"/>
+  <text x="640" y="282" text-anchor="middle" fill="#8b949e" font-size="11">Raw AES Ciphertext</text>
+
+  <!-- Arrow down -->
+  <line x1="640" y1="295" x2="640" y2="330" stroke="#2ecc71" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- AES Decrypt (the main operation) -->
+  <rect x="435" y="335" width="240" height="55" rx="8" fill="#162312" stroke="#2ecc71" stroke-width="2" filter="url(#s)"/>
+  <text x="555" y="357" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">AES-256-CBC Decrypt</text>
+  <text x="555" y="375" text-anchor="middle" fill="#8b949e" font-size="10">key + iv from left chain</text>
+
+  <!-- Arrow down -->
+  <line x1="555" y1="390" x2="555" y2="410" stroke="#2ecc71" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- PKCS7 unpad -->
+  <rect x="475" y="415" width="160" height="35" rx="8" fill="#1a1e24" stroke="#2ecc71" stroke-width="1.5" filter="url(#s)"/>
+  <text x="555" y="438" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">PKCS#7 Unpad</text>
+
+  <!-- Arrow right to result -->
+  <line x1="635" y1="432" x2="695" y2="432" stroke="#2ecc71" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- Final result -->
+  <rect x="700" y="412" width="175" height="45" rx="8" fill="#162312" stroke="#2ecc71" stroke-width="2" filter="url(#s)"/>
+  <text x="787" y="432" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">Plaintext</text>
+  <text x="787" y="448" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">Password</text>
+
+  <!-- Connecting bracket -->
+  <rect x="330" y="95" width="2" height="370" rx="1" fill="#8b949e" opacity="0.15"/>
+</svg>

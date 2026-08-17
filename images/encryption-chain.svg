@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="ar" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#58a6ff"/>
+    </marker>
+    <marker id="ar-red" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#e74c3c"/>
+    </marker>
+    <marker id="ar-grn" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 7 3, 0 6" fill="#2ecc71"/>
+    </marker>
+    <linearGradient id="chainGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#2ecc71;stop-opacity:0.05"/>
+    </linearGradient>
+    <filter id="glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#58a6ff" flood-opacity="0.3"/>
+    </filter>
+    <filter id="sh">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="400" rx="12" fill="#0d1117"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" fill="#f0f6fc" font-size="18" font-weight="bold">ABB Encryption Chain — 5-Stage Password Protection</text>
+
+  <!-- Chain flow background -->
+  <rect x="20" y="50" width="860" height="120" rx="8" fill="url(#chainGrad)" opacity="0.5"/>
+
+  <!-- Step 1: Seed -->
+  <rect x="30" y="65" width="130" height="90" rx="8" fill="#1a1e24" stroke="#e74c3c" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="95" y="88" text-anchor="middle" fill="#e74c3c" font-size="10" font-weight="bold">STEP 1</text>
+  <text x="95" y="106" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">Hardcoded Seed</text>
+  <text x="95" y="122" text-anchor="middle" fill="#8b949e" font-size="9">.rodata section</text>
+  <text x="95" y="136" text-anchor="middle" fill="#f39c12" font-size="8" font-family="Consolas, monospace">5fed151e...434c</text>
+  <text x="95" y="148" text-anchor="middle" fill="#e74c3c" font-size="8">⚠ STATIC KEY</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="160" y1="110" x2="188" y2="110" stroke="#58a6ff" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- Step 2: Substitution -->
+  <rect x="193" y="65" width="140" height="90" rx="8" fill="#1a1e24" stroke="#f39c12" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="263" y="88" text-anchor="middle" fill="#f39c12" font-size="10" font-weight="bold">STEP 2</text>
+  <text x="263" y="106" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">Substitution</text>
+  <text x="263" y="122" text-anchor="middle" fill="#8b949e" font-size="9">Modified RC4-KSA</text>
+  <text x="263" y="136" text-anchor="middle" fill="#8b949e" font-size="9">S-box / U-box / T-box</text>
+  <text x="263" y="148" text-anchor="middle" fill="#e74c3c" font-size="8">⚠ DETERMINISTIC</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="333" y1="110" x2="361" y2="110" stroke="#58a6ff" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- Step 3: Base64 -->
+  <rect x="366" y="65" width="110" height="90" rx="8" fill="#1a1e24" stroke="#2ecc71" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="421" y="88" text-anchor="middle" fill="#2ecc71" font-size="10" font-weight="bold">STEP 3</text>
+  <text x="421" y="106" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">Base64</text>
+  <text x="421" y="122" text-anchor="middle" fill="#8b949e" font-size="9">32 bytes → 44 chars</text>
+  <text x="421" y="136" text-anchor="middle" fill="#8b949e" font-size="9">= passphrase</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="476" y1="110" x2="504" y2="110" stroke="#58a6ff" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- Step 4: EVP_BytesToKey -->
+  <rect x="509" y="65" width="160" height="90" rx="8" fill="#1a1e24" stroke="#3b82f6" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="589" y="88" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="bold">STEP 4</text>
+  <text x="589" y="106" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">EVP_BytesToKey</text>
+  <text x="589" y="122" text-anchor="middle" fill="#8b949e" font-size="9">MD5, salt=NULL, count=1</text>
+  <text x="589" y="136" text-anchor="middle" fill="#8b949e" font-size="9">→ AES Key (32B) + IV (16B)</text>
+  <text x="589" y="148" text-anchor="middle" fill="#e74c3c" font-size="8">⚠ NO SALT, NO STRETCH</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="669" y1="110" x2="697" y2="110" stroke="#58a6ff" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- Step 5: AES-256-CBC -->
+  <rect x="702" y="65" width="170" height="90" rx="8" fill="#1a1e24" stroke="#a855f7" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="787" y="88" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="bold">STEP 5</text>
+  <text x="787" y="106" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">AES-256-CBC</text>
+  <text x="787" y="122" text-anchor="middle" fill="#8b949e" font-size="9">PKCS#7 padding</text>
+  <text x="787" y="136" text-anchor="middle" fill="#8b949e" font-size="9">→ Base64 → config.db</text>
+  <text x="787" y="148" text-anchor="middle" fill="#e74c3c" font-size="8">⚠ STATIC IV</text>
+
+  <!-- Key Derivation Detail -->
+  <text x="450" y="200" text-anchor="middle" fill="#58a6ff" font-size="14" font-weight="bold">Key Derivation Detail (Step 4)</text>
+
+  <!-- MD5 blocks -->
+  <rect x="80" y="220" width="220" height="45" rx="6" fill="#1a1e24" stroke="#3b82f6" stroke-width="1" filter="url(#sh)"/>
+  <text x="190" y="240" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold">D1 = MD5(passphrase)</text>
+  <text x="190" y="256" text-anchor="middle" fill="#8b949e" font-size="9">→ 16 bytes</text>
+
+  <rect x="340" y="220" width="220" height="45" rx="6" fill="#1a1e24" stroke="#3b82f6" stroke-width="1" filter="url(#sh)"/>
+  <text x="450" y="240" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold">D2 = MD5(D1 + passphrase)</text>
+  <text x="450" y="256" text-anchor="middle" fill="#8b949e" font-size="9">→ 16 bytes</text>
+
+  <rect x="600" y="220" width="220" height="45" rx="6" fill="#1a1e24" stroke="#3b82f6" stroke-width="1" filter="url(#sh)"/>
+  <text x="710" y="240" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold">D3 = MD5(D2 + passphrase)</text>
+  <text x="710" y="256" text-anchor="middle" fill="#8b949e" font-size="9">→ 16 bytes</text>
+
+  <!-- Arrows between MD5 blocks -->
+  <line x1="300" y1="242" x2="335" y2="242" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="560" y1="242" x2="595" y2="242" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <!-- Result boxes -->
+  <rect x="120" y="290" width="380" height="40" rx="6" fill="#162312" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="310" y="315" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">AES-256 Key = D1 + D2 (32 bytes)</text>
+
+  <rect x="540" y="290" width="240" height="40" rx="6" fill="#162312" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="660" y="315" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">AES IV = D3 (16 bytes)</text>
+
+  <!-- Arrows from D blocks to result -->
+  <line x1="190" y1="266" x2="190" y2="287" stroke="#2ecc71" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#ar-grn)"/>
+  <line x1="450" y1="266" x2="450" y2="287" stroke="#2ecc71" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#ar-grn)"/>
+  <line x1="710" y1="266" x2="710" y2="287" stroke="#2ecc71" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#ar-grn)"/>
+
+  <!-- Bottom warning -->
+  <rect x="150" y="350" width="600" height="35" rx="8" fill="#2d1215" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="450" y="373" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">⚠ Entire chain is deterministic — same seed = same key on every device</text>
+</svg>
