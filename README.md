@@ -59,7 +59,7 @@ The full reverse-engineering write-up — the hardcoded seed, the modified RC4-K
 substitution cipher, the `EVP_BytesToKey` key derivation, the AES-256-CBC scheme, the
 static-IV weakness, and the `config.db` schema — is documented in the accompanying blog post:
 
-**→ [Decrypting Synology Active Backup Inventory Credentials](https://blog.offseclabs.tech/posts/synology-active-backup-decrypting-inventory-credentials/)**
+**→ [Synology Active Backup - Decrypting Inventory Credentials](https://blog.offseclabs.tech/posts/synology-active-backup-decrypting-inventory-credentials/)**
 
 ## Requirements
 
