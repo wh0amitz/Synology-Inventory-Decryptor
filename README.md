@@ -20,24 +20,24 @@ Synology NAS devices running Active Backup for Business are **credential gold mi
 </picture>
 
 ```
-            ┌─────────────────────────────────────────────────────────────────────┐
-            │                     ATTACK SCENARIOS                                │
-            ├─────────────────────────────────────────────────────────────────────┤
-            │                                                                     │
-            │  1. NAS Compromise → Full Infrastructure Takeover                   │
-            │     Shell on NAS → config.db → ESXi root → all VMs                  │
-            │                                                                     │
-            │  2. Backup File Exfiltration                                        │
-            │     Stolen .abb backup of NAS → extract config.db → decrypt         │
-            │                                                                     │
-            │  3. Shared Storage / Misconfigured Permissions                      │
-            │     SMB/NFS share exposes /volume1/ → read config.db directly       │
-            │                                                                     │
-            │  4. Lateral Movement Pivot                                          │
-            │     Low-priv foothold → NAS via default creds → ABB credentials     │
-            │     → Domain Admin / vCenter Admin                                  │
-            │                                                                     │
-            └─────────────────────────────────────────────────────────────────────┘
+              ┌─────────────────────────────────────────────────────────────────────┐
+              │                     ATTACK SCENARIOS                                │
+              ├─────────────────────────────────────────────────────────────────────┤
+              │                                                                     │
+              │  1. NAS Compromise → Full Infrastructure Takeover                   │
+              │     Shell on NAS → config.db → ESXi root → all VMs                  │
+              │                                                                     │
+              │  2. Backup File Exfiltration                                        │
+              │     Stolen .abb backup of NAS → extract config.db → decrypt         │
+              │                                                                     │
+              │  3. Shared Storage / Misconfigured Permissions                      │
+              │     SMB/NFS share exposes /volume1/ → read config.db directly       │
+              │                                                                     │
+              │  4. Lateral Movement Pivot                                          │
+              │     Low-priv foothold → NAS via default creds → ABB credentials     │
+              │     → Domain Admin / vCenter Admin                                  │
+              │                                                                     │
+              └─────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Credential Value Matrix
@@ -59,7 +59,7 @@ The full reverse-engineering write-up — the hardcoded seed, the modified RC4-K
 substitution cipher, the `EVP_BytesToKey` key derivation, the AES-256-CBC scheme, the
 static-IV weakness, and the `config.db` schema — is documented in the accompanying blog post:
 
-**→ [Decrypting Synology Active Backup Inventory Credentials](<BLOG_URL>)**
+**→ [Decrypting Synology Active Backup Inventory Credentials](https://blog.offseclabs.tech/posts/synology-active-backup-decrypting-inventory-credentials/)**
 
 ## Requirements
 
