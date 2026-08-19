@@ -2,6 +2,8 @@
 
 A post-exploitation tool that **instantly decrypts all credentials** stored in Synology Active Backup for Business (ABB) `config.db`, yielding plaintext passwords for ESXi, vCenter, Hyper-V, Windows/Linux servers, MSSQL, and Oracle databases.
 
+**Tested only on a Synology DS920+ NAS.**
+
 ## Why This Matters — Offensive Value
 
 Synology NAS devices running Active Backup for Business are **credential gold mines**. ABB requires privileged access to every system it backs up, so its `config.db` contains:
